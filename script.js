@@ -1,3 +1,16 @@
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!prefersReducedMotion && typeof Lenis !== "undefined") {
+    const lenis = new Lenis();
+
+    function animateScroll(time) {
+        lenis.raf(time);
+        requestAnimationFrame(animateScroll);
+    }
+
+    requestAnimationFrame(animateScroll);
+}
+
 const quoteForm = document.querySelector("#quote-form");
 
 quoteForm?.addEventListener("submit", (event) => {
